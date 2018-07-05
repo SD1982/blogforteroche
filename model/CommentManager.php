@@ -1,5 +1,8 @@
 <?php
-class CommentManager
+
+require_once('model/Manager.php');
+
+class CommentManager extends Manager
 {
     public function getComments($postsId)
     {
@@ -13,16 +16,11 @@ class CommentManager
 
     public function postComment($postsId, $author, $comment)
     {
-    $db=$this->dbConnect();
+    $db= $this->dbConnect();
     $comments= $db->prepare('INSERT INTO comments(posts_id, author, comment_content, comment_date)VALUES(?, ?, ?, now())');
     $affectedlines=$comments->execute(array($postsId, $author, $comment));
     
     return $affectedlines;
     }
 
-    private function dbConnect()
-    {
-        $db = new PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'root', '');
-        return $db;
-    }
 }
