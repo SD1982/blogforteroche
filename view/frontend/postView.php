@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<?php $title = 'billet pour l\'Alaska'; ?>
+<?php $title = 'billet simple pour l\'Alaska'; ?>
 
 <?php ob_start(); ?>
-<h1>Billet simple pour l'Alaska</h1>
 <p><a href="index.php">Retour à la liste des billets</a></p>
 
 <div class="news">
