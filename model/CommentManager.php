@@ -6,7 +6,7 @@ class CommentManager extends Manager{
     
     public function getComments($postsId){
     $db = $this->dbConnect();
-    $comments = $db->prepare('SELECT id, author, comment_content, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE posts_id = ? ORDER BY comment_date');
+    $comments = $db->prepare('SELECT id, author, comment_content, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE posts_id = ? ORDER BY comment_date DESC');
     $comments->execute(array($postsId));
     return $comments;
     }
