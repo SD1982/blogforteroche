@@ -44,7 +44,7 @@
                     <a class="nav-link" href="index.php">Accueil</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Connexion</a>
+                    <a class="nav-link" href="index.php?action=login&amp;">Admin</a>
                 </li>
             </ul>
         </div>
