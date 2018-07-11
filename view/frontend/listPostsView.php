@@ -8,21 +8,21 @@
 while ($data = $posts->fetch())
 {
 ?>
-    <div class="news">
-        <h3>
-            <?= htmlspecialchars($data['title']) ?>
-                <em>le <?= $data['creation_date_fr'] ?></em>
-        </h3>
 
-        <p>
-            <?= nl2br(htmlspecialchars($data['posts_content'])) ?>
-                <br />
-                <em><a href="index.php?action=post&amp;id=<?= $data['id'] ?>">Commenter</a></em>
-        </p>
-    </div>
-    <?php
+    <h3>
+        <?=$data['title']?>
+            <em>le <?= $data['creation_date_fr'] ?></em>
+    </h3>
+
+    <?= $data['substr(posts_content, 1, 1000)']?>
+        <br />
+        <div>
+            <a class="btn btn-primary" href="index.php?action=post&amp;id=<?= $data['id'] ?>">Lire la suite</a>
+        </div>
+
+        <?php
 }
 $posts->closeCursor();
 ?>
-    <?php $content = ob_get_clean(); ?>
-    <?php require('template.php'); ?>
+        <?php $content = ob_get_clean(); ?>
+        <?php require('template.php'); ?>
