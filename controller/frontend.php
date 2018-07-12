@@ -3,9 +3,15 @@
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
 
+function lastPost(){
+    $postManager=new PostManager();
+    $posts = $postManager->lastPost();
+    require('view/frontend/lastPostView.php');
+}
+
 function listPosts(){
     $postManager=new PostManager();
-    $posts = $postManager->resumePosts();
+    $posts = $postManager->getPosts();
     require('view/frontend/listPostsView.php');
 }
 
@@ -28,7 +34,8 @@ function addComment($postId, $author, $comment){
     }         
 }
 
-function commentSignal($commentId){
+function commentSignal($commentId, $postId){
     $commentManager = new CommentManager();
-    $signaledComment = $commentManager->signalComment($_GET['id']); 
+    $signaledComment = $commentManager->signalComment($_GET['id']);
+    header('Location: index.php?action=post&id=' . $postId);
 }

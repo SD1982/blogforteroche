@@ -1,25 +1,28 @@
 <?php $title = 'billet simple pour l\'Alaska'; ?>
 
 <?php ob_start(); ?>
+
 <div>
-    <a class="btn btn-primary" href="index.php">Retour à la liste des billets</a>
+    <a class="btn btn-primary" href="index.php?action=listPosts">Retour à la liste des billets</a>
 </div>
 <br/>
+
 <div class="news">
     <h3>
         <?=$post['title'] ?>
             <em>le <?= $post['creation_date_fr'] ?></em>
     </h3>
-
     <p>
         <?=$post['posts_content'] ?>
     </p>
 </div>
 <br/>
+
 <div>
     <button data-toggle="modal" data-backdrop="false" href="#commentForm" class="btn btn-primary">Commenter</button>
 </div>
 <br/>
+
 <h2>Commentaires</h2>
 <div class="container">
     <div class="modal fade" id="commentForm">
@@ -39,33 +42,33 @@
                             <label for="comment">Commentaire</label><br />
                             <textarea class="form-control" id="comment" name="comment" placeholder="Votre commentaire"></textarea>
                         </div>
-                        <br />
-                        <div>
-                            <input type="submit" />
-                        </div>
+                        <br/>
+                        <input type="submit" class="btn btn-primary" />
+                        <button class="btn btn-primary" data-dismiss="modal">Annuler</button>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" data-dismiss="modal">Annuler</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <?php
     while ($comment = $comments->fetch())
     {
 ?>
-    <p><strong><?= $comment['author']?></strong> le
+    <p>
+        <strong><?= $comment['author']?></strong> le
         <?=$comment['comment_date_fr']?>
     </p>
     <p>
         <?=$comment['comment_content'] ?>
     </p>
+
     <div>
-        <a class="btn btn-primary" href="index.php?action=signalComment&amp;id=<?= $comment['id'] ?>">Signaler</a>
+        <a class="btn btn-primary" href="index.php?action=signalComment&amp;id=<?=$comment['id'] ?>&idPost=<?= $post['id'] ?>">Signaler</a>
     </div>
     <br/>
+
     <?php
 }
 ?>

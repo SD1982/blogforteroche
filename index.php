@@ -5,14 +5,59 @@ require('controller/backend.php');
 
 try { 
     if (isset($_GET['action'])) {
-        if ($_GET['action'] == 'listPosts') {
+        if ($_GET['action'] == 'listPosts'){
                 listposts();       
         }
-     
-        elseif ($_GET['action'] == 'post') {
-            if (isset($_GET['id']) && $_GET['id'] > 0)  {
-                post();    
+        
+        elseif($_GET['action'] == 'adminListPosts'){
+              if($_SESSION['pseudo']='forteroche'){
+                adminListposts();       
             }
+        }
+        
+        elseif($_GET['action'] == 'post') {
+            if (isset($_GET['id']) && $_GET['id'] > 0){
+                    post();
+            }
+            else {
+                throw new Exception('Aucun identifiant de billet envoyé');
+            }
+        }
+        
+        elseif($_GET['action'] == 'adminPost') {
+            if (isset($_GET['id']) && $_GET['id'] > 0){
+             if($_SESSION['pseudo']='forteroche'){
+                adminPost();       
+                }
+            }
+            else {
+                throw new Exception('Aucun identifiant de billet envoyé');
+            }
+        }
+        
+        elseif($_GET['action']=='login'){
+            if (isset($_POST['pseudo']) && $_POST['pseudo']=="forteroche"){
+                if (isset($_POST['pass']) && $_POST['pass']=="motdepass"){
+                    $_SESSION['pseudo']='forteroche';
+                    adminListPosts();
+                }
+            }
+            else {
+                 throw new Exception('Vous avez fait une erreur dans l\'un des champs demandés !');
+               }
+        }
+        
+        elseif($_GET['action']=='unlog'){
+            if($_SESSION['pseudo']='forteroche'){
+                session_destroy();
+                lastpost();
+            }
+            
+        }
+         elseif($_GET['action']=='consultComments'){
+            if(isset($_GET['id']) && $_GET['id'] > 0){
+                    admincomment();
+            }    
             else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
@@ -34,48 +79,51 @@ try {
           
         elseif($_GET['action']=='signalComment'){
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                commentSignal($_GET['id']);
+                commentSignal($_GET['id'], $_GET['idPost']);
+            }
+            else {
+                throw new Exception('Aucun identifiant de commentaire envoyé');
+            }
+        }
+                
+        elseif($_GET['action']=='moderateComments'){
+             if($_SESSION['pseudo']='forteroche'){
+                adminListSignaledComment();
+            } 
+        }
+        
+        elseif($_GET['action']=='deleteComment'){
+            if($_SESSION['pseudo']='forteroche'){
+                if(isset($_GET['id']) && $_GET['id'] > 0){
+                    adminDeleteComment($_GET['id']);
+                }
             }
             else {
                 throw new Exception('Aucun identifiant de commentaire envoyé');
             }
         }
         
-        elseif($_GET['action']=='login'){
-            if (isset($_POST['pseudo']) && $_POST['pseudo']=="forteroche"){
-                if (isset($_POST['pass']) && $_POST['pass']=="motdepass"){
-                    $_SESSION['pseudo']='forteroche';
-                    adminListPosts();
+        elseif($_GET['action']=='deleteSignaledComment'){
+            if($_SESSION['pseudo']='forteroche'){
+                if(isset($_GET['id']) && $_GET['id'] > 0){
+                    adminDeleteComment($_GET['id']);
                 }
             }
             else {
-                 throw new Exception('Vous avez fait une erreur dans l\'un des champs demandés !');
-               }
+                throw new Exception('Aucun identifiant de commentaire envoyé');
+            }
         }
         
-        elseif($_GET['action']=='unlog'){
+        elseif($_GET['action']=='validateSignaledComment'){
             if($_SESSION['pseudo']='forteroche'){
-                session_destroy();
-                listposts();
+                if(isset($_GET['id']) && $_GET['id'] > 0){
+                    adminValidateSignaledComment($_GET['id']);
+                }
             }
-            
-        }
-        
-        elseif($_GET['action']=='manage'){
-            if(isset($_GET['id']) && $_GET['id'] > 0){
-                    admincomment();
-            }    
             else {
-                throw new Exception('Aucun identifiant de billet envoyé');
+                throw new Exception('Aucun identifiant de commentaire envoyé');
             }
         }
-        
-          elseif($_GET['action']=='moderateComments'){
-             if($_SESSION['pseudo']='forteroche'){
-                adminListSignaledComment();
-            } 
-        }
-        
         elseif($_GET['action']=='createPost'){
             if($_SESSION['pseudo']='forteroche'){
                 if(isset($_POST['title']) && $_POST['content']){
@@ -84,6 +132,19 @@ try {
                     }
                 }
             }  
+        }
+        
+        elseif($_GET['action']=='postUpdate'){
+            if(isset($_SESSION['pseudo']) && $_SESSION['pseudo']=='forteroche'){
+                if(isset($_GET['id']) && $_GET['id'] > 0){
+                    if(!empty($_POST['title']) && !empty($_POST['content'])){
+                        adminPostUpdate($_GET['id'], $_POST['title'], $_POST['content']);
+                    }
+                    else {
+                    throw new Exception('Tous les champs ne sont pas remplis !');
+                    }
+                }
+            } 
         }
         
         elseif($_GET['action']=='deletePost'){
@@ -101,51 +162,10 @@ try {
                  }
             }
         }
-        
-        elseif($_GET['action']=='deleteComment'){
-            if($_SESSION['pseudo']='forteroche'){
-            if(isset($_GET['id']) && $_GET['id'] > 0){
-                adminDeleteComment($_GET['id']);
-                }
-            }
-            else {
-                throw new Exception('Aucun identifiant de commentaire envoyé');
-            }
-        }
-        
-        elseif($_GET['action']=='postUpdate'){
-            if(isset($_SESSION['pseudo']) && $_SESSION['pseudo']=='forteroche'){
-                if(isset($_GET['id']) && $_GET['id'] > 0){
-                    if(!empty($_POST['title']) && !empty($_POST['content'])){
-                        adminPostUpdate($_GET['id'], $_POST['title'], $_POST['content']);
-                    }
-                    else {
-                    throw new Exception('Tous les champs ne sont pas remplis !');
-                    }
-                }
-            } 
-        }
-        
-        elseif($_GET['action']=='deleteComment'){
-            if($_SESSION['pseudo']='forteroche'){
-            if(isset($_GET['id']) && $_GET['id'] > 0){
-                adminDeleteComment($_GET['id']);
-                }
-            }
-            else {
-                throw new Exception('Aucun identifiant de commentaire envoyé');
-            }
-        }
     }
-    
-     else {
-          if(isset($_SESSION['pseudo']) && $_SESSION['pseudo']=='forteroche'){
-                adminListPosts();
-            }
-         else{
-             listPosts();
-         }     
-    }
+    else {
+       lastPost();
+    }           
 }
 catch(Exception $e) { 
     echo 'Erreur : ' . $e->getMessage();

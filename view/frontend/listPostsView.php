@@ -1,28 +1,27 @@
 <?php $title = 'billet simple pour l\'Alaska'; ?>
 
 <?php ob_start(); ?>
-<p>Derniers billets du blog :</p>
 
+<div>
+    <a class="btn btn-primary" href="index.php">Retour à l'accueil</a>
+</div>
+<br/>
+
+<p>Précédents billets du blog :</p>
 
 <?php
 while ($data = $posts->fetch())
 {
 ?>
-
     <h3>
-        <?=$data['title']?>
-            <em>le <?= $data['creation_date_fr'] ?></em>
+        <a href="index.php?action=post&amp;id=<?=$data['id']?>">
+            <?=$data['title']?>
+                <em>le <?= $data['creation_date_fr'] ?></em>
+        </a>
     </h3>
-
-    <?= $data['substr(posts_content, 1, 1000)']?>
-        <br />
-        <div>
-            <a class="btn btn-primary" href="index.php?action=post&amp;id=<?= $data['id'] ?>">Lire la suite</a>
-        </div>
-
-        <?php
+    <?php
 }
 $posts->closeCursor();
 ?>
-        <?php $content = ob_get_clean(); ?>
-        <?php require('template.php'); ?>
+    <?php $content = ob_get_clean(); ?>
+    <?php require('template.php'); ?>

@@ -12,6 +12,14 @@ function adminListPosts(){
     require('view/backend/listPostsView.php');
 }
 
+function adminPost(){
+    $postManager = new PostManager();
+    $commentManager = new CommentManager();
+    $post = $postManager->getPost($_GET['id']);
+    $comments = $commentManager->getComments($_GET['id']);
+    require('view/backend/postView.php');
+}
+
 function adminComment(){
     $postManager = new PostManager();
     $commentManager = new CommentManager();
@@ -25,7 +33,7 @@ function adminCreatePost(){
     $post = $adminManager->createPost($_POST['title'], $_POST['content']);
     $postManager=new PostManager();
     $posts = $postManager->getPosts();
-    header('Location: index.php');
+    header('Location: index.php?action=adminListPosts');
 }
     
 function adminPostUpdate($postId, $postTitle, $postContent){
@@ -33,7 +41,7 @@ function adminPostUpdate($postId, $postTitle, $postContent){
    $post = $adminManager->updatePost($_GET['id'], $_POST['title'], $_POST['content']);
    $postManager=new PostManager();
    $posts = $postManager->getPosts();
-   header('Location: index.php');
+   require('view/backend/listPostsView.php');
 }
 
 function adminDeletePost($postId){
@@ -53,11 +61,18 @@ function adminDeleteComment($commentId){
     $commentManager = new CommentManager();
     $post = $postManager->getPost($_GET['id']);
     $comments = $commentManager->getComments($_GET['id']);
-    require('view/backend/commentView.php');
+    header('Location: index.php?action=moderateComments');
 }
 
 function adminListSignaledComment(){
     $commentManager = new CommentManager();
     $signaledComments = $commentManager->getSignaledComments();
     require('view/backend/signaledCommentsView.php');
+    
+}
+
+function adminValidateSignaledComment($commentId){
+    $commentManager = new CommentManager();
+    $validateSignaledComment = $commentManager->signaledCommentValidation($_GET['id']); 
+    header('Location: index.php?action=moderateComments');
 }

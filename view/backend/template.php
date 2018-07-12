@@ -9,7 +9,6 @@
     <meta name="author" content="">
 
     <link href="css/style.css" rel="stylesheet" />
-
     <link rel="icon" href="../../../../favicon.ico">
 
     <title>
@@ -30,6 +29,16 @@
             text-align: center;
         }
 
+        .btn-primary {
+            margin: 5px;
+        }
+
+        .adminButton {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+        }
+
     </style>
 </head>
 
@@ -37,11 +46,11 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-      </button>
+        </button>
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="btn btn-primary" href="index.php">Accueil</a>
+                    <a class="btn btn-primary" href="index.php?action=adminListPosts">Accueil</a>
                 </li>
                 <li>
                     <button data-toggle="modal" data-backdrop="false" href="#createPost" class="btn btn-primary">Ajouter un article</button>
@@ -54,10 +63,7 @@
                 </li>
             </ul>
         </div>
-        <br/>
-
     </nav>
-
     <main role="main" class="container">
         <div class="starter-template">
             <h1>
@@ -85,18 +91,15 @@
                                     <br/>
                                 </div>
                                 <div>
-                                    <input type="submit" />
+                                    <input type="submit" class="btn btn-primary" />
+                                    <button class="btn btn-primary" data-dismiss="modal">Annuler</button>
                                 </div>
                             </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-primary" data-dismiss="modal">Annuler</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <?= $content ?>
     </main>
 
@@ -110,6 +113,7 @@
         });
 
     </script>
+
 </body>
 
 </html>

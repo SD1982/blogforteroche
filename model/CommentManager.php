@@ -31,4 +31,12 @@ class CommentManager extends Manager{
     $req = $db->query('SELECT id, author, comment_content, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr FROM comments WHERE signaled=1 ORDER BY comment_date DESC');
     return $req;
     }
+    
+    public function signaledCommentValidation($commentId){
+    $db = $this->dbConnect();
+    $req= $db->prepare('UPDATE comments SET signaled=0 WHERE id= :thisCommentId');
+    $req->execute(array(
+        'thisCommentId'=>$commentId
+    ));
+    }
 }
