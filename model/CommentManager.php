@@ -20,7 +20,7 @@ class CommentManager extends Manager{
     
     public function signalComment($commentId){
     $db = $this->dbConnect();
-    $req= $db->prepare('UPDATE comments SET signaled=1 WHERE id= :thisCommentId');
+    $req = $db->prepare('UPDATE comments SET signaled=1 WHERE id= :thisCommentId');
     $req->execute(array(
         'thisCommentId'=>$commentId
     ));
@@ -34,9 +34,22 @@ class CommentManager extends Manager{
     
     public function signaledCommentValidation($commentId){
     $db = $this->dbConnect();
-    $req= $db->prepare('UPDATE comments SET signaled=0 WHERE id= :thisCommentId');
+    $req = $db->prepare('UPDATE comments SET signaled=0 WHERE id= :thisCommentId');
     $req->execute(array(
         'thisCommentId'=>$commentId
     ));
     }
+    
+    public function commentsCount($postId){
+    $db = $this->dbConnect();
+    $totalComments = $db->query('SELECT count(*) FROM comments WHERE posts_id= :postId'); 
+    return $totalComments;
+    }
+    
+    public function signaledCommentsCount(){
+    $db = $this->dbConnect();
+    $signaled = $db->query('SELECT count(*) FROM comments WHERE signaled = 1');
+    return $signaled;
+    }
+    
 }

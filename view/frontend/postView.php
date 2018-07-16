@@ -1,9 +1,11 @@
 <?php $title = 'billet simple pour l\'Alaska'; ?>
 
+
+
 <?php ob_start(); ?>
 
 <div>
-    <a class="btn btn-primary" href="index.php?action=listPosts">Retour à la liste des billets</a>
+    <a class="btn btn-info" href="index.php?action=listPosts">Retour à la liste des billets</a>
 </div>
 <br/>
 
@@ -19,7 +21,7 @@
 <br/>
 
 <div>
-    <button data-toggle="modal" data-backdrop="false" href="#commentForm" class="btn btn-primary">Commenter</button>
+    <button data-toggle="modal" data-backdrop="false" href="#commentForm" class="btn btn-info">Commenter</button>
 </div>
 <br/>
 
@@ -43,8 +45,8 @@
                             <textarea class="form-control" id="comment" name="comment" placeholder="Votre commentaire"></textarea>
                         </div>
                         <br/>
-                        <input type="submit" class="btn btn-primary" />
-                        <button class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                        <input type="submit" class="btn btn-success" />
+                        <button class="btn btn-danger" data-dismiss="modal">Annuler</button>
                     </form>
                 </div>
             </div>
@@ -65,7 +67,7 @@
     </p>
 
     <div>
-        <a class="btn btn-primary" href="index.php?action=signalComment&amp;id=<?=$comment['id'] ?>&idPost=<?= $post['id'] ?>">Signaler</a>
+        <a class="btn btn-danger" href="index.php?action=signalComment&amp;id=<?=$comment['id'] ?>&idPost=<?= $post['id'] ?>">Signaler</a>
     </div>
     <br/>
 

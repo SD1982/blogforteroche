@@ -20,6 +20,7 @@ function post(){
     $commentManager = new CommentManager();
     $post = $postManager->getPost($_GET['id']);
     $comments = $commentManager->getComments($_GET['id']);
+    $totalComments = $commentManager->commentsCount($_GET['id']);
     require('view/frontend/postView.php');
 }
 
@@ -29,9 +30,9 @@ function addComment($postId, $author, $comment){
     if ($affectedLines === false) {
         die('Impossible d\'ajouter le commentaire !');
     }
-    else {
+    else{
         header('Location: index.php?action=post&id=' . $postId);
-    }         
+    }
 }
 
 function commentSignal($commentId, $postId){

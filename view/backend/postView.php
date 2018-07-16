@@ -3,7 +3,7 @@
 <?php ob_start(); ?>
 
 <div>
-    <a class="btn btn-primary" href="index.php?action=adminListPosts">Retour à la liste des billets</a>
+    <a class="btn btn-info" href="index.php?action=adminListPosts">Retour à la liste des billets</a>
 </div>
 <br/>
 
@@ -20,13 +20,13 @@
 
 <div class="adminButton">
     <div>
-        <button data-toggle="modal" data-backdrop="false" href="#postModif" class="btn btn-primary">modifier ce post</button>
+        <button data-toggle="modal" data-backdrop="false" href="#postModif" class="btn btn-success">modifier ce post</button>
     </div>
     <div>
-        <button data-toggle="modal" data-backdrop="false" href="#postDelete" class="btn btn-primary">supprimer ce post</button>
+        <button data-toggle="modal" data-backdrop="false" href="#postDelete" class="btn btn-danger">supprimer ce post</button>
     </div>
     <div>
-        <button data-toggle="modal" data-backdrop="false" href="#commentForm" class="btn btn-primary">Commenter</button>
+        <button data-toggle="modal" data-backdrop="false" href="#commentForm" class="btn btn-success">Commenter</button>
     </div>
 </div>
 <br/>
@@ -40,10 +40,10 @@
                     <button type="button" class="close" data-dismiss="modal">x</button>
                 </div>
                 <div class="modal-body">
-                    <form action="index.php?action=addComment&amp;id=<?= $post['id'] ?>" method="post">
+                    <form action="index.php?action=adminAddComment&amp;id=<?= $post['id'] ?>" method="post">
                         <div>
                             <label for="author">Votre pseudo</label><br />
-                            <input type="text" class="form-control" id="author" name="author" placeholder='Votre pseudo' />
+                            <input type="text" class="form-control" id="author" name="author" placeholder='Jean Forteroche' />
                         </div>
                         <br />
                         <div>
@@ -51,8 +51,8 @@
                             <textarea class="form-control" id="comment" name="comment" placeholder="Votre commentaire"></textarea>
                         </div>
                         <br/>
-                        <input type="submit" class="btn btn-primary" />
-                        <button class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                        <input type="submit" class="btn btn-success" />
+                        <button class="btn btn-danger" data-dismiss="modal">Annuler</button>
                     </form>
                 </div>
             </div>
@@ -80,8 +80,8 @@
                             <textarea class="form-control" id="content" name="content"><?= $post['posts_content']?></textarea>
                         </div>
                         <div>
-                            <input type="submit" class="btn btn-primary" />
-                            <button class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                            <input type="submit" class="btn btn-success" />
+                            <button class="btn btn-danger" data-dismiss="modal">Annuler</button>
                         </div>
                     </form>
                 </div>
@@ -109,8 +109,8 @@
                             <input type="password" class="form-control" name="pass" id="pass" placeholder="Votre password">
                         </div>
                         <div>
-                            <input type="submit" class="btn btn-primary" />
-                            <button class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                            <input type="submit" class="btn btn-success" />
+                            <button class="btn btn-danger" data-dismiss="modal">Annuler</button>
                         </div>
                     </form>
                 </div>
@@ -131,7 +131,7 @@
         <p>
             <?=$comment['comment_content'] ?>
         </p>
-        <div> <a class="btn btn-primary" href="index.php?action=deleteSignaledComment&amp;id=<?= $comment['id'] ?>">Supprimer</a>
+        <div> <a class="btn btn-danger" href="index.php?action=deleteComment&amp;id=<?= $comment['id']?>&idPost=<?= $post['id']?>">Supprimer</a>
         </div>
         <br/>
     </div>

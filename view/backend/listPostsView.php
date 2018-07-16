@@ -2,21 +2,25 @@
 
 <?php ob_start(); ?>
 
-<?php
+<div class="listPosts">
+
+    <?php
 while ($data = $posts->fetch())
 {
 ?>
-    <h3>
-        <a href="index.php?action=adminPost&amp;id=<?=$data['id']?>">
-            <?=$data['title']?>
-                <em>le <?= $data['creation_date_fr'] ?></em>
-        </a>
-    </h3>
-    <?php
+        <h3>
+            <a href="index.php?action=adminPost&amp;id=<?=$data['id']?>">
+                <?=$data['title']?>
+                    <em>le <?= $data['creation_date_fr'] ?></em>
+            </a>
+        </h3>
+        <?php
 }
 $posts->closeCursor();
 ?>
+</div>
 
-    <?php $content = ob_get_clean(); ?>
 
-    <?php require('template.php'); ?>
+<?php $content = ob_get_clean(); ?>
+
+<?php require('template.php'); ?>

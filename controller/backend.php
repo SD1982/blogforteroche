@@ -20,14 +20,6 @@ function adminPost(){
     require('view/backend/postView.php');
 }
 
-function adminComment(){
-    $postManager = new PostManager();
-    $commentManager = new CommentManager();
-    $post = $postManager->getPost($_GET['id']);
-    $comments = $commentManager->getComments($_GET['id']);
-    require('view/backend/commentView.php');
-}
-
 function adminCreatePost(){
     $adminManager=new AdminManager();
     $post = $adminManager->createPost($_POST['title'], $_POST['content']);
@@ -53,15 +45,25 @@ function adminDeletePost($postId){
     require('view/backend/listPostsView.php');
 }
     
+function adminAddComment($postId, $author, $comment){
+    $commentManager = new CommentManager();
+    $affectedLines =$commentManager->postComment($postId, $author, $comment);
+    if ($affectedLines === false) {
+        die('Impossible d\'ajouter le commentaire !');
+    }
+    elseif ($_SESSION['pseudo']='forteroche'){
+        header('Location: index.php?action=adminPost&id=' . $postId);
+    }
+}
 
-function adminDeleteComment($commentId){
+function adminDeleteComment($commentId, $postId){
     $adminManager=new AdminManager();
     $comment=$adminManager->deleteComment($_GET['id']);
     $postManager = new PostManager();
     $commentManager = new CommentManager();
     $post = $postManager->getPost($_GET['id']);
     $comments = $commentManager->getComments($_GET['id']);
-    header('Location: index.php?action=moderateComments');
+    header('Location: index.php?action=adminPost&id=' . $postId);
 }
 
 function adminListSignaledComment(){

@@ -1,0 +1,117 @@
+body {
+    padding-top: 5rem;
+}
+
+body .container {
+    max-width: 90%;
+}
+
+.starter-template {
+    padding: 3rem 1.5rem;
+    text-align: center;
+    color: antiquewhite;
+    height: 400px;
+    background-image: url(/public/images/172bd2fe8f7b862f0c8c39d10ca62007.jpg);
+    background-repeat: no-repeat;
+}
+
+.btn-primary,
+.btn-danger,
+.btn-success,
+.btn-info,
+.btn-warning {
+    margin: 5px;
+}
+
+.adminButton {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.listPosts {
+    background-image: url(/public/images);
+    margin: 5% 0;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.listPosts h3 {
+    margin: 20px;
+}
+
+.listPosts h3 a {
+    color: #138496;
+}
+
+#errorMessage {
+    height: 400px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#errorMessage h2 {
+    margin-top: 10%;
+}
+
+#contact {
+    height: auto;
+    width: 90%;
+    color: #138496;
+    border: 3px solid #343A40;
+    border-radius: 15px;
+    margin: 15px auto;
+    background-color: #343A40;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+
+}
+
+#contact nav {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#menuReseaux {
+    margin: 0;
+    padding: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    list-style: none;
+
+}
+
+#menuReseaux li {
+    padding: 25px;
+
+}
+
+#menuReseaux i {
+    color: #138496;
+    font-size: 25px;
+}
+
+.copyright {
+    margin: 0;
+    font-size: 25px;
+
+}
+
+.mailContact {
+    margin: 15px auto;
+    font-size: 25px;
+
+}

@@ -3,7 +3,7 @@
 <?php ob_start(); ?>
 
 <div>
-    <a class="btn btn-primary" href="index.php?action=adminListPosts">Retour à la liste des billets</a>
+    <a class="btn btn-info" href="index.php?action=adminListPosts">Retour à la liste des billets</a>
 </div>
 <br/>
 
@@ -23,10 +23,10 @@
 
     <div class="adminButton">
         <div>
-            <a class="btn btn-primary" href="index.php?action=validateSignaledComment&amp;id=<?= $signaled['id'] ?>">Valider</a>
+            <a class="btn btn-success" href="index.php?action=validateSignaledComment&amp;id=<?= $signaled['id'] ?>">Valider</a>
         </div>
         <div>
-            <a class="btn btn-primary" href="index.php?action=deleteSignaledComment&amp;id=<?= $signaled['id'] ?>">Supprimer</a>
+            <a class="btn btn-danger" href="index.php?action=deleteSignaledComment&amp;id=<?= $signaled['id'] ?>">Supprimer</a>
         </div>
     </div>
     <br/>

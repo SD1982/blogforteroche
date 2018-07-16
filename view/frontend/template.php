@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 
+
 <html lang="fr">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <link href="css/style.css" rel="stylesheet" />
-    <link rel="icon" href="../../../../favicon.ico">
 
     <title>
         <?= $title ?>
     </title>
 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Blog de jean forteroche l'histoire de mon voyage en aller simple vers l'alaska">
+    <meta name="author" content="Jean forteroche">
+
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <!-- CSS -->
+    <link href="/public/css/style.css" rel="stylesheet" />
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary" />
+    <!-- Open Graph data -->
+    <meta property="og:title" content="Forteroche billet simple pour l'alaska" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="www.projet4.wedostedec.com" />
+    <meta property="og:image" content="" />
+    <meta property="og:description" content="Retrouvez le récit de mon voyage sans retour vers l'alaska" />
+
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
-    <!-- Custom styles for this template -->
-    <style type="text/css">
-        body {
-            padding-top: 5rem;
-        }
-
-        .starter-template {
-            padding: 3rem 1.5rem;
-            text-align: center;
-        }
-
-        .btn-primary {
-            margin: 5px;
-        }
-
-    </style>
 </head>
 
 <body>
@@ -44,15 +44,15 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="btn btn-primary" href="index.php">Accueil</a>
+                    <a class="btn btn-info" class="button" href="index.php">Accueil</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="btn btn-primary" href="index.php?action=listPosts">Articles précedents</a>
+                    <a class="btn btn-info" class="button" href="index.php?action=listPosts">Articles précedents</a>
                 </li>
             </ul>
         </div>
         <div>
-            <button data-toggle="modal" data-backdrop="false" href="#formulaire" class="btn btn-primary">Admin</button>
+            <button data-toggle="modal" data-backdrop="false" href="#formulaire" class="btn btn-success">Admin</button>
         </div>
     </nav>
     <main role="main" class="container">
@@ -78,8 +78,8 @@
                                     <label for="pass">Password</label>
                                     <input type="password" class="form-control" name="pass" id="pass" placeholder="Votre password">
                                 </div>
-                                <button type="submit" class="btn btn-primary">Envoyer</button>
-                                <button class="btn btn-primary" data-dismiss="modal">Annuler</button>
+                                <button type="submit" class="btn btn-success">Envoyer</button>
+                                <button class="btn btn-danger" data-dismiss="modal">Annuler</button>
                             </form>
                         </div>
                     </div>
@@ -88,6 +88,19 @@
         </div>
         <?= $content ?>
     </main>
+
+    <footer id="contact">
+        <nav>
+            <ul id="menuReseaux">
+                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#"><i class="far fa-envelope"></i></a></li>
+            </ul>
+        </nav>
+        <p class="copyright"><i class="far fa-copyright"> Copyright Jean Forteroche 2018</i> Publié le 14 Juillet 2018</p>
+        <p class="mailContact">Contact information: <a href="mailto:someone@example.com">someone@example.com</a>.</p>
+    </footer>
 
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
