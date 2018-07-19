@@ -200,7 +200,6 @@ try {
         
         elseif($_GET['action']=='deletePost'){
             if (isset($_POST['pseudo']) && $_POST['pseudo']=="forteroche"){
-                if (isset($_POST['pass']) && $_POST['pass']=="motdepass"){
                     if(isset($_GET['id']) && $_GET['id'] > 0){
                         adminDeletePost($_GET['id']);
                     }
@@ -208,12 +207,9 @@ try {
                         throw new Exception('Aucun identifiant de billet envoyé');
                     }
                 }
-                 else {
-                    throw new Exception('Vous avez fait une erreur dans l\'un des champs demandés !');
-                 }
             }
         }
-    }
+    
     else {
        lastPost();
     }           
