@@ -49,6 +49,9 @@
                 <li class="nav-item active">
                     <a class="btn btn-info" class="button" href="index.php?action=listPosts">Articles précedents</a>
                 </li>
+                <div>
+                    <button data-toggle="modal" data-backdrop="false" href="#inscriptionForm" class="btn btn-info">Inscription</button>
+                </div>
             </ul>
         </div>
         <div>
@@ -69,7 +72,7 @@
                             <button type="button" class="close" data-dismiss="modal">x</button>
                         </div>
                         <div class="modal-body">
-                            <form action="index.php?action=login" method="post">
+                            <form action="index.php?action=adminPasswordCheck" method="post">
                                 <div class="form-group">
                                     <label for="nom">Pseudo</label>
                                     <input type="text" class="form-control" name="pseudo" id="pseudo" placeholder="Votre pseudo">
@@ -78,7 +81,41 @@
                                     <label for="pass">Password</label>
                                     <input type="password" class="form-control" name="pass" id="pass" placeholder="Votre password">
                                 </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" name="passwordCheck" id="passwordCheck" placeholder="Confirmer votre password">
+                                </div>
                                 <button type="submit" class="btn btn-success">Envoyer</button>
+                                <button class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="modal fade" id="inscriptionForm">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">x</button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="index.php?action=createAccount" method="post">
+                                <div class="form-group">
+                                    <label for="nom">Pseudo</label>
+                                    <input type="text" class="form-control" name="pseudo" id="pseudo" placeholder="Votre pseudo">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Votre password">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" name="passwordCheck" id="passwordCheck" placeholder="Confirmer votre password">
+                                </div>
+                                <button type="submit" class="btn btn-success">confirmer</button>
                                 <button class="btn btn-danger" data-dismiss="modal">Annuler</button>
                             </form>
                         </div>

@@ -2,7 +2,7 @@
 
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
-require_once('model/AdminManager.php');
+require_once('model/MembersManager.php');
 
 
 
@@ -21,25 +21,26 @@ function adminPost(){
 }
 
 function adminCreatePost(){
-    $adminManager=new AdminManager();
-    $post = $adminManager->createPost($_POST['title'], $_POST['content']);
+    $postManager=new PostManager();
+    $post = $postManager->createPost($_POST['title'], $_POST['content']);
     $postManager=new PostManager();
     $posts = $postManager->getPosts();
     header('Location: index.php?action=adminListPosts');
 }
     
 function adminPostUpdate($postId, $postTitle, $postContent){
-   $adminManager=new AdminManager();
-   $post = $adminManager->updatePost($_GET['id'], $_POST['title'], $_POST['content']);
+   $postManager=new PostManager();
+   $post = $postManager->updatePost($_GET['id'], $_POST['title'], $_POST['content']);
    $postManager=new PostManager();
    $posts = $postManager->getPosts();
    require('view/backend/listPostsView.php');
 }
 
 function adminDeletePost($postId){
-    $adminManager=new AdminManager();
-    $post = $adminManager->deletePost($_GET['id']);
-    $comments=$adminManager->deleteComments($_GET['id']);
+    $postManager=new PostManager();
+    $commentManager = new CommentManager();
+    $post = $postManager->deletePost($_GET['id']);
+    $comments=$commentManager->deleteComments($_GET['id']);
     $postManager=new PostManager();
     $posts = $postManager->getPosts();
     require('view/backend/listPostsView.php');
@@ -57,8 +58,8 @@ function adminAddComment($postId, $author, $comment){
 }
 
 function adminDeleteComment($commentId, $postId){
-    $adminManager=new AdminManager();
-    $comment=$adminManager->deleteComment($_GET['id']);
+    $commentManager = new CommentManager();
+    $comment=$commentManager->deleteComment($_GET['id']);
     $postManager = new PostManager();
     $commentManager = new CommentManager();
     $post = $postManager->getPost($_GET['id']);
@@ -77,4 +78,26 @@ function adminValidateSignaledComment($commentId){
     $commentManager = new CommentManager();
     $validateSignaledComment = $commentManager->signaledCommentValidation($_GET['id']); 
     header('Location: index.php?action=moderateComments');
+}
+
+function createAccount($userPseudo, $hashedPass){
+    $membermanager = new MembersManager();
+    $newMember= $membermanager->createUsersAccount($userPseudo, $hashedPass);
+    header('Location: index.php');
+    
+    
+}
+
+function checkAdminPassword(){
+    $membermanager = new MembersManager();
+    $adminPassword = $membermanager->checkAdminPassword();
+    $isPasswordCorrect = password_verify($_POST['pass'], $adminPassword);
+    if(!$adminPassword){
+           die('Mauvais pseudo ou mdp');
+    }
+    else{
+        $_SESSION['pseudo'] = 'forteroche';
+        header('Location: index.php?action=adminListPosts');
+    }
+
 }

@@ -12,11 +12,11 @@
     {
 ?>
     <div class="news">
-        <p><strong><?=$signaled['author']?></strong> le
+        <p><strong><?=htmlspecialchars($signaled['author'])?></strong> le
             <?= $signaled['comment_date_fr'] ?>
         </p>
         <p>
-            <?=$signaled['comment_content']?>
+            <?=htmlspecialchars($signaled['comment_content'])?>
         </p>
     </div>
     <br/>

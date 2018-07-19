@@ -41,20 +41,31 @@ try {
             }
         }
         
-        elseif($_GET['action']=='login'){
-            if (isset($_POST['pseudo']) && $_POST['pseudo']=="forteroche"){
-                if (isset($_POST['pass']) && $_POST['pass']=="motdepass"){
-                    if($_SESSION['pseudo']='forteroche'){
-                    adminListPosts();
-                   }
-                   else {
-                        throw new Exception('Vous devez etre admin et connecté pour accéder a cette page');
-            }
+        elseif($_GET['action']=='createAccount'){
+            if(!empty($_POST['pseudo'])&& !empty($_POST['password'])){
+                if($_POST['password'] == $_POST['passwordCheck']){
+                    $userPseudo = htmlspecialchars($_POST['pseudo']);
+                    $hashedPass = password_hash($_POST['password'], PASSWORD_BCRYPT);
+                    createAccount($userPseudo, $hashedPass); 
                 }
+                else{
+                    throw new Exception('les mot de pass ne sont pas identiques');
+                }
+                       
             }
             else {
-                 throw new Exception('Vous avez fait une erreur dans l\'un des champs demandés !');
-               }
+                throw new Exception('Vous devez remplir tout les champs demandés !');
+            }
+        }
+        
+        elseif($_GET['action']=='adminPasswordCheck'){
+            if (isset($_POST['pseudo']) && $_POST['pseudo']=="forteroche"){
+                if(isset($_POST['pass']) && ($_POST['pass']==$_POST['passwordCheck']));
+                        checkAdminPassword($_POST['pass']);
+            }
+            else {
+                throw new Exception('Tous les champs ne sont pas remplis !');
+            }
         }
         
         elseif($_GET['action']=='unlog'){
@@ -68,7 +79,7 @@ try {
         elseif ($_GET['action'] == 'addComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-                    addComment($_GET['id'], $_POST['author'], $_POST['comment']);
+                    addComment($_GET['id'], htmlspecialchars($_POST['author']), htmlspecialchars($_POST['comment']));
                 }
                 else {
                     throw new Exception('Tous les champs ne sont pas remplis !');
@@ -136,6 +147,7 @@ try {
             if($_SESSION['pseudo']=='forteroche'){
                 if(isset($_GET['id']) && $_GET['id'] > 0){
                     adminDeleteComment($_GET['id']);
+                    header('Location: index.php?action=moderateComments');
                 }
                 else {
                     throw new Exception('Vous devez etre admin et connecté pour accéder a cette page');
@@ -164,7 +176,7 @@ try {
             if($_SESSION['pseudo']=='forteroche'){
                 if(isset($_POST['title']) && $_POST['content']){
                     if(!empty($_POST['title']) && !empty($_POST['content'])){
-                        adminCreatePost($_POST['title'], $_POST['content']);
+                        adminCreatePost(htmlspecialchars($_POST['title']), htmlspecialchars($_POST['content']));
                     }
                     else {
                         throw new Exception('Vous devez etre admin et connecté pour accéder a cette page');
@@ -177,7 +189,7 @@ try {
             if(isset($_SESSION['pseudo']) && $_SESSION['pseudo']=='forteroche'){
                 if(isset($_GET['id']) && $_GET['id'] > 0){
                     if(!empty($_POST['title']) && !empty($_POST['content'])){
-                        adminPostUpdate($_GET['id'], $_POST['title'], $_POST['content']);
+                        adminPostUpdate($_GET['id'], htmlspecialchars($_POST['title']), htmlspecialchars($_POST['content']));
                     }
                     else {
                         throw new Exception('Tous les champs ne sont pas remplis !');

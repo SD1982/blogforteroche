@@ -2,6 +2,7 @@
 
 require_once('model/Manager.php');
 
+
 class CommentManager extends Manager{
     
     public function getComments($postsId){
@@ -17,6 +18,18 @@ class CommentManager extends Manager{
     $affectedLines = $comments->execute(array($_GET['id'], $_POST['author'], $_POST['comment']));
     return $affectedLines;
     }
+    
+    public function deleteComment($commentId){
+    $db = $this->dbConnect();
+    $req = $db->prepare('DELETE FROM comments WHERE id=?');
+    $req->execute(array($commentId));
+	}
+    
+    public function deleteComments($postId){
+    $db = $this->dbConnect();
+    $req = $db->prepare('DELETE FROM comments WHERE posts_id=?');
+    $req->execute(array($postId));
+	}
     
     public function signalComment($commentId){
     $db = $this->dbConnect();

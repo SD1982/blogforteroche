@@ -59,11 +59,12 @@
     {
 ?>
     <p>
-        <strong><?= $comment['author']?></strong> le
+
+        <strong><?=htmlspecialchars($comment['author'])?></strong> le
         <?=$comment['comment_date_fr']?>
     </p>
     <p>
-        <?=$comment['comment_content'] ?>
+        <?=htmlspecialchars($comment['comment_content'])?>
     </p>
 
     <div>
