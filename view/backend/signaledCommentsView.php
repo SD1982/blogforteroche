@@ -1,22 +1,16 @@
 <?php $title = 'Commentaires signalés'; ?>
 
 <?php ob_start(); ?>
-
-<div>
-    <a class="btn btn-info" href="index.php?action=adminListPosts">Retour à la liste des billets</a>
-</div>
-<br/>
-
+<h2>Commentaires (<?= $totalSignaled ?>)</h2>
 <?php
-    while ($signaled = $signaledComments->fetch())
-    {
-?>
+while ($signaled = $signaledComments->fetch()) {
+    ?>
     <div class="news">
-        <p><strong><?=htmlspecialchars($signaled['author'])?></strong> le
+        <p><strong><?= htmlspecialchars($signaled['author']) ?></strong> le
             <?= $signaled['comment_date_fr'] ?>
         </p>
         <p>
-            <?=htmlspecialchars($signaled['comment_content'])?>
+            <?= htmlspecialchars($signaled['comment_content']) ?>
         </p>
     </div>
     <br/>
@@ -32,6 +26,7 @@
     <br/>
 
     <?php
+
 }
 ?>
 

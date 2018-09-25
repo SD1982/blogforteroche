@@ -5,23 +5,26 @@
 <div class="lastPost">
     <p>Dernier billet du blog :</p>
 
-    <?php
-while ($data = $posts->fetch())
-{
-?>
-        <h3 class="lastPost">
-            <?=$data['title']?>
-                <em>le <?= $data['creation_date_fr'] ?></em>
-        </h3>
+    <div id="lastPostContainer">
+<?php
+while ($data = $posts->fetch()) {
+    ?>
+            <div>
+                <h3 class="lastPostTitle">
+                    <?= $data['title'] ?>
+                </h3>
+                <h4><em>le <?= $data['creation_date_fr'] ?></em></h4>
 
-        <?= $data['posts_content']?>
-            <a class="btn btn-info" href="index.php?action=post&amp;id=<?= $data['id'] ?>">Commentaires</a>
-            <?php
-  
-   
-}
-$posts->closeCursor();
-?>
+                <p><?= strip_tags(substr($data['posts_content'], 0, 1000)) ?></p> 
+                <a class="btn btn-info" href="index.php?action=post&amp;id=<?= $data['id'] ?>">Lire la suite</a>   
+            </div>
+            
+        <?php
+
+    }
+    $posts->closeCursor();
+    ?>
+    </div>
 </div>
 
 

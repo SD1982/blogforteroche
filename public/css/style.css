@@ -11,8 +11,7 @@ body .container {
     text-align: center;
     color: antiquewhite;
     height: 400px;
-    background-image: url(/public/images/172bd2fe8f7b862f0c8c39d10ca62007.jpg);
-    background-repeat: no-repeat;
+    background-image: url(public/images/172bd2fe8f7b862f0c8c39d10ca62007.jpg);
 }
 
 .btn-primary,
@@ -29,8 +28,20 @@ body .container {
     display: flex;
 }
 
+#lastPostContainer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+#lastPostContainer>div {
+    width: 33%;
+}
+
 .listPosts {
-    background-image: url(/public/images);
     margin: 5% 0;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
@@ -70,7 +81,6 @@ body .container {
     -ms-flex-pack: center;
     justify-content: center;
     text-align: center;
-
 }
 
 #contact nav {
@@ -91,12 +101,10 @@ body .container {
     display: -ms-flexbox;
     display: flex;
     list-style: none;
-
 }
 
 #menuReseaux li {
     padding: 25px;
-
 }
 
 #menuReseaux i {
@@ -107,11 +115,9 @@ body .container {
 .copyright {
     margin: 0;
     font-size: 25px;
-
 }
 
 .mailContact {
     margin: 15px auto;
     font-size: 25px;
-
 }

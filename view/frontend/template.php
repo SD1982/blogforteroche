@@ -20,7 +20,7 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <!-- CSS -->
-    <link href="/public/css/style.css" rel="stylesheet" />
+    <link href="public/css/style.css" rel="stylesheet" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
@@ -49,9 +49,12 @@
                 <li class="nav-item active">
                     <a class="btn btn-info" class="button" href="index.php?action=listPosts">Articles précedents</a>
                 </li>
+                <!--
+                // preparation en vue de la creation d'un espace membre //
                 <div>
                     <button data-toggle="modal" data-backdrop="false" href="#inscriptionForm" class="btn btn-info">Inscription</button>
                 </div>
+                -->
             </ul>
         </div>
         <div>
@@ -80,10 +83,6 @@
                                 <div class="form-group">
                                     <label for="pass">Password</label>
                                     <input type="password" class="form-control" name="pass" id="pass" placeholder="Votre password">
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <input type="password" class="form-control" name="passwordCheck" id="passwordCheck" placeholder="Confirmer votre password">
                                 </div>
                                 <button type="submit" class="btn btn-success">Envoyer</button>
                                 <button class="btn btn-danger" data-dismiss="modal">Annuler</button>
