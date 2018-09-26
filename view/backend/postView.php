@@ -1,34 +1,40 @@
 <?php $title = 'billet simple pour l\'Alaska'; ?>
 
 <?php ob_start(); ?>
-
-<div>
-    <a class="btn btn-info" href="index.php?action=adminListPosts">Retour à la liste des billets</a>
-</div>
-<br/>
-
+<!--contenu de l'article -->
 <div class="news">
-    <h3>
-        <?= $post['title'] ?>
-            <em>le <?= $post['creation_date_fr'] ?></em>
-    </h3>
-    <h3>
-        <?= $post['posts_content'] ?>
-    </h3>
+    <div class="newsContainer">
+        <div class="postTitle">
+            <h3>
+                <?= $post['title'] ?>
+                <em>le <?= $post['creation_date_fr'] ?></em>
+            </h3>
+        </div>
+        <div class="postContent">
+            <div class="postImage">
+                <img src=<?= $post['url_image'] ?> alt="">
+            </div>
+            <br/>
+            <div class="postText">
+                <p>
+                    <?= $post['posts_content'] ?>
+                </p>
+            </div>
+            <br/>
+            <div class="adminButton">
+                <div>
+                    <button data-toggle="modal" data-backdrop="false" href="#postModif" class="btn btn-success">modifier ce post</button>
+                </div>
+                <div>
+                     <button data-toggle="modal" data-backdrop="false" href="#postDelete" class="btn btn-danger">supprimer ce post</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <br/>
 
-<div class="adminButton">
-    <div>
-        <button data-toggle="modal" data-backdrop="false" href="#postModif" class="btn btn-success">modifier ce post</button>
-    </div>
-    <div>
-        <button data-toggle="modal" data-backdrop="false" href="#postDelete" class="btn btn-danger">supprimer ce post</button>
-    </div>
-</div>
-<br/>
-
-<h2>Commentaires (<?= $totalComments ?>)</h2>
+<!--fenetre modal du formulaire d'ajout de commentaire -->
 <div class="container">
     <div class="modal fade" id="commentForm">
         <div class="modal-dialog">
@@ -56,7 +62,7 @@
         </div>
     </div>
 </div>
-
+<!--fenetre modal du formulaire de modification d'article -->
 <div class="container">
     <div class="modal fade" id="postModif">
         <div class="modal-dialog">
@@ -77,6 +83,16 @@
                             <textarea class="form-control" id="content" name="content"><?= $post['posts_content'] ?></textarea>
                         </div>
                         <div>
+                            <label for="title">Url de votre miniature</label><br />
+                            <input type="text" class="form-control" name="miniature" placeholder="<?= $post['url_miniature'] ?>">
+                            <br/>
+                        </div>
+                        <div>
+                            <label for="title">Url de votre image</label><br />
+                            <input type="text" class="form-control" name="image" placeholder="<?= $post['url_image'] ?>">
+                            <br/>
+                        </div>
+                        <div>
                             <input type="submit" class="btn btn-success" />
                             <button class="btn btn-danger" data-dismiss="modal">Annuler</button>
                         </div>
@@ -86,7 +102,7 @@
         </div>
     </div>
 </div>
-
+<!--fenetre modal du formulaire de suppression d'article -->
 <div class="container">
     <div class="modal fade" id="postDelete">
         <div class="modal-dialog">
@@ -115,29 +131,33 @@
         </div>
     </div>
 </div>
-
+<!--contenu des commentaires de l'article -->
+<div class="postComments">
+    <h2>Commentaires (<?= $totalComments ?>)</h2>
 <?php
 while ($comment = $comments->fetch()) {
     ?>
-    <div class="news">
-        <h3>
-            <strong><?= $comment['author'] ?></strong> le
-            <?= $comment['comment_date_fr'] ?>
-        </h3>
-        <p>
-            <?= $comment['comment_content'] ?>
-        </p>
-        <div> <a class="btn btn-danger" href="index.php?action=deleteComment&amp;id=<?= $comment['id'] ?>&idPost=<?= $post['id'] ?>">Supprimer</a>
+       <div>
+            <p>
+                <strong><?= htmlspecialchars($comment['author']) ?></strong> le
+                <?= $comment['comment_date_fr'] ?>
+            </p> 
+             <p>
+                <?= htmlspecialchars($comment['comment_content']) ?>
+            </p>
+             <br/>
+            <div> 
+                <a class="btn btn-danger" href="index.php?action=deleteComment&amp;id=<?= $comment['id'] ?>&idPost=<?= $post['id'] ?>">Supprimer</a>
+            </div>
+            <br/>
         </div>
-        <br/>
-    </div>
-
     <?php
 
 }
 ?>
-<div>
-        <button data-toggle="modal" data-backdrop="false" href="#commentForm" class="btn btn-success">Commenter</button>
+    <div>
+        <button data-toggle="modal" data-backdrop="false" href="#commentForm" class="btn btn-info">Commenter</button>
+    </div>
 </div>
     <?php $content = ob_get_clean(); ?>
     <?php require('template.php'); ?>

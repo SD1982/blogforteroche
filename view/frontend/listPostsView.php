@@ -1,30 +1,36 @@
 <?php $title = 'billet simple pour l\'Alaska'; ?>
 
-
 <?php ob_start(); ?>
-
+<!--listes des articles -->
 <div class="listPosts">
-
-    <p>Précédents billets du blog :</p>
-
+    <div class="listPostTitle">
+        <h3>Précédents billets du blog :</h3>
+    </div>
+    <div id="listPostContainer">
     <?php
     while ($data = $posts->fetch()) {
         ?>
-    <div class="col-lg-3">
-        <h3>
-            <a href="index.php?action=post&amp;id=<?= $data['id'] ?>">
-                <?= $data['title'] ?>
-                    <em>le <?= $data['creation_date_fr'] ?></em>
-            </a>
-            <p><?= substr($data['posts_content'], 0, 1200) ?></p> 
-        </h3>
-    </div>
-        
+            <div>
+                <h3>
+                    <a href="index.php?action=post&amp;id=<?= $data['id'] ?>">
+                        <?= $data['title'] ?>...
+                        <em>le <?= $data['creation_date_fr'] ?></em>
+                    </a>  
+                </h3>
+                    <a href="index.php?action=post&amp;id=<?= $data['id'] ?>">
+                    <img src=<?= $data['url_miniature'] ?> alt="">
+                    </a>
+                <br/>
+                <p><?= strip_tags(substr($data['posts_content'], 0, 500)) ?> ...</p> 
+                <br/>
+                <a class="btn btn-info" href="index.php?action=post&amp;id=<?= $data['id'] ?>">Lire la suite</a>
+            </div>
         <?php
 
     }
     $posts->closeCursor();
     ?>
+    </div>
 </div>
 
 <?php $content = ob_get_clean(); ?>

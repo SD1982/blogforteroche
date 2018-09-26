@@ -6,12 +6,11 @@ require_once("model/Manager.php");
 class PostManager extends Manager
 {
 
-
-    public function createPost($postTitle, $postContent)
+    public function createPost($postTitle, $postContent, $postMiniature, $postImage)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO posts(title, posts_content, creation_date) VALUES(?, ?, NOW())');
-        $req->execute(array($postTitle, $postContent));
+        $req = $db->prepare('INSERT INTO posts(title, posts_content, url_miniature, url_image, creation_date) VALUES(?, ?, ?, ?, NOW())');
+        $req->execute(array($postTitle, $postContent, $postMiniature, $postImage));
     }
 
     public function updatePost($postId, $postTitle, $postContent)
@@ -35,14 +34,14 @@ class PostManager extends Manager
     public function getPosts()
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT id, title, posts_content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM posts ORDER BY creation_date DESC ');
+        $req = $db->query('SELECT id, title, posts_content, url_image, url_miniature, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date_fr FROM posts ORDER BY creation_date DESC ');
         return $req;
     }
 
     public function getPost($postsId)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, title, posts_content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM posts WHERE id = ?');
+        $req = $db->prepare('SELECT id, title, posts_content, url_image, url_miniature, DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date_fr FROM posts WHERE id = ?');
         $req->execute(array($postsId));
         $post = $req->fetch();
         return $post;
@@ -51,7 +50,7 @@ class PostManager extends Manager
     public function lastPost()
     {
         $db = $this->dbConnect();
-        $req = $db->query('SELECT id, title, posts_content, DATE_FORMAT(creation_date, \'%d/%m/%Y à %Hh%imin%ss\') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT 0, 3');
+        $req = $db->query('SELECT id, title, posts_content, url_image, url_miniature,  DATE_FORMAT(creation_date, \'%d/%m/%Y\') AS creation_date_fr FROM posts ORDER BY creation_date DESC LIMIT 0, 3');
         return $req;
     }
 

@@ -4,8 +4,6 @@ require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
 require_once('model/MembersManager.php');
 
-
-
 function adminListPosts()
 {
     $postManager = new PostManager();
@@ -26,7 +24,7 @@ function adminPost()
 function adminCreatePost()
 {
     $postManager = new PostManager();
-    $post = $postManager->createPost($_POST['title'], $_POST['content']);
+    $post = $postManager->createPost($_POST['title'], $_POST['content'], $_POST['miniature'], $_POST['image']);
     $postManager = new PostManager();
     $posts = $postManager->getPosts();
     header('Location: index.php?action=adminListPosts');
@@ -74,14 +72,20 @@ function adminDeleteComment($commentId, $postId)
     header('Location: index.php?action=adminPost&id=' . $postId);
 }
 
+
 function adminListSignaledComment()
 {
     $commentManager = new CommentManager();
     $signaledComments = $commentManager->getSignaledComments();
     $totalSignaled = $commentManager->signaledCommentsCount();
     require('view/backend/signaledCommentsView.php');
+}
 
-
+function adminDeleteSignaledComment($commentId)
+{
+    $commentManager = new CommentManager();
+    $comment = $commentManager->deleteComment($_GET['id']);
+    header('Location: index.php?action=moderateComments');
 }
 
 function adminValidateSignaledComment($commentId)
