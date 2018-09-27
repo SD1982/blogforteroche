@@ -5,17 +5,21 @@ require_once("model/Manager.php");
 class MembersManager extends Manager
 {
 
-/* en prevision d'un espace membre 
-    public function createUsersAccount($userPseudo, $hashedPass){
-        $db = $this->dbConnect();
-        $newMember = $db->prepare ('INSERT INTO members(pseudo, pass, role) VALUES(?, ?, "member")');
-        $newMember->execute(array($userPseudo, $hashedPass)); 
-    }
-     */
-    public function checkAdminPassword()
+    public function createUsersAccount($userPseudo, $hashedPass)
     {
         $db = $this->dbConnect();
-        $adminPassword = $db->query('SELECT pass FROM members WHERE pseudo="forteroche"');
-        return $adminPassword;
+        $newMember = $db->prepare('INSERT INTO members(pseudo, pass, role) VALUES(?, ?, "member")');
+        $newMember->execute(array($userPseudo, $hashedPass));
+    }
+
+    public function checkAdminPassword($pseudo)
+    {
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT pass FROM members WHERE pseudo= :thisPseudo AND role="admin"');
+        $req->execute(array(
+            'thisPseudo' => $pseudo
+        ));
+        $hashedPass = $req->fetch();
+        return $hashedPass['pass'];
     }
 }

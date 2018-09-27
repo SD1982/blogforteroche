@@ -33,34 +33,26 @@ try {
             } else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
-        }
-
-        /* en vue d'un espace membre
-        elseif($_GET['action']=='createAccount'){
-            if(!empty($_POST['pseudo'])&& !empty($_POST['password'])){
-                if($_POST['password'] == $_POST['passwordCheck']){
+//création d'un compte utilisateur
+        } elseif ($_GET['action'] == 'createAccount') {
+            if (!empty($_POST['pseudo']) && !empty($_POST['password'])) {
+                if ($_POST['password'] == $_POST['passwordCheck']) {
                     $userPseudo = htmlspecialchars($_POST['pseudo']);
                     $hashedPass = password_hash($_POST['password'], PASSWORD_BCRYPT);
-                    createAccount($userPseudo, $hashedPass); 
-                }
-                else{
+                    createAccount($userPseudo, $hashedPass);
+                } else {
                     throw new Exception('les mot de pass ne sont pas identiques');
                 }
-                       
-            }
-            else {
+
+            } else {
                 throw new Exception('Vous devez remplir tout les champs demandés !');
             }
-        }
-         */
 //verification du mot de pass de l'admin lors du login
-        elseif ($_GET['action'] == 'adminPasswordCheck') {
-            if (isset($_POST['pseudo']) && $_POST['pseudo'] == "forteroche") {
-                if (isset($_POST['pass']) && ($_POST['pass'] == $_POST['passwordCheck']));
-                checkAdminPassword($_POST['pass']);
-            } else {
-                throw new Exception('Tous les champs ne sont pas remplis !');
-            }
+        } elseif ($_GET['action'] == 'adminPasswordCheck') {
+            if (!empty($_POST['pseudo']) && !empty($_POST['pass'])) {
+                checkAdminPassword($_POST['pass'], $_POST['pseudo']);
+            } else
+                throw new Exception('Tous les champs ne sont pas remplis !');  
 //deconnexion de l'admin
         } elseif ($_GET['action'] == 'unlog') {
             if ($_SESSION['pseudo'] = 'forteroche') {
@@ -144,8 +136,8 @@ try {
 //creation d'un nouvel article
         } elseif ($_GET['action'] == 'createPost') {
             if ($_SESSION['pseudo'] == 'forteroche') {
-                if (isset($_POST['title']) && $_POST['content']) {
-                    if (!empty($_POST['title']) && !empty($_POST['content'])) {
+                if (isset($_POST['title']) && $_POST['content'] && $_POST['miniature'] && $_POST['image']) {
+                    if (!empty($_POST['title']) && !empty($_POST['content']) && !empty($_POST['miniature']) && !empty($_POST['image'])) {
                         adminCreatePost(htmlspecialchars($_POST['title']), htmlspecialchars($_POST['content']), htmlspecialchars($_POST['url_miniature']), htmlspecialchars($_POST['url_image']));
                     }
                 } else {
@@ -169,7 +161,7 @@ try {
         } elseif ($_GET['action'] == 'deletePost') {
             if (isset($_POST['pseudo']) && $_POST['pseudo'] == "forteroche") {
                 if (isset($_GET['id']) && $_GET['id'] > 0) {
-                    adminDeletePost($_GET['id']);
+                    adminDeletePost($_GET['id'], $_POST['pseudo'], $_POST['pass']);
                 } else {
                     throw new Exception('Aucun identifiant de billet envoyé');
                 }

@@ -35,7 +35,7 @@ function addComment($postId, $author, $comment)
     if ($affectedLines === false) {
         die('Impossible d\'ajouter le commentaire !');
     } else {
-        header('Location: index.php?action=post&id=' . $postId);
+        header('Location: index.php?action=post&id=' . $postId . '#comments');
     }
 }
 
@@ -43,5 +43,5 @@ function commentSignal($commentId, $postId)
 {
     $commentManager = new CommentManager();
     $signaledComment = $commentManager->signalComment($_GET['id']);
-    header('Location: index.php?action=post&id=' . $postId);
+    header('Location: index.php?action=post&id=' . $postId . '#comments');
 }

@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 <!--contenu de l'article -->
-<div class="news">
+<div class="news" id="article">
     <div class="newsContainer">
         <div class="postTitle">
             <h3>
@@ -12,7 +12,7 @@
         </div>
         <div class="postContent">
             <div class="postImage">
-                <img src=<?= $post['url_image'] ?> alt="">
+                <img src=<?= $post['url_image'] ?> alt="<?= $post['title'] ?>">
             </div>
             <br/>
             <div class="postText">
@@ -46,7 +46,7 @@
                     <form action="index.php?action=adminAddComment&amp;id=<?= $post['id'] ?>" method="post">
                         <div>
                             <label for="author">Votre pseudo</label><br />
-                            <input type="text" class="form-control" id="author" name="author" placeholder='Jean Forteroche' />
+                            <input type="text" class="form-control" id="author" name="author" value=<?= $_SESSION['pseudo'] ?> />
                         </div>
                         <br />
                         <div>
@@ -74,7 +74,7 @@
                     <form action="index.php?action=postUpdate&amp;id=<?= $post['id'] ?>" method="post">
                         <div>
                             <label for="title">Modifier le titre de votre article</label><br />
-                            <input type="text" class="form-control" id="title" name="title" placeholder="<?= $post['title'] ?>">
+                            <input type="text" class="form-control" id="title" name="title" value="<?= $post['title'] ?>">
                         </div>
                         <br/>
                         <div>
@@ -82,16 +82,18 @@
                             <br />
                             <textarea class="form-control" id="content" name="content"><?= $post['posts_content'] ?></textarea>
                         </div>
+                        <!-- preparation de la modification d'image en meme temps que la modif d'article
                         <div>
                             <label for="title">Url de votre miniature</label><br />
-                            <input type="text" class="form-control" name="miniature" placeholder="<?= $post['url_miniature'] ?>">
+                            <input type="text" class="form-control" name="miniature" value="<?= $post['url_miniature'] ?>">
                             <br/>
                         </div>
                         <div>
                             <label for="title">Url de votre image</label><br />
-                            <input type="text" class="form-control" name="image" placeholder="<?= $post['url_image'] ?>">
+                            <input type="text" class="form-control" name="image" value="<?= $post['url_image'] ?>">
                             <br/>
                         </div>
+                        -->
                         <div>
                             <input type="submit" class="btn btn-success" />
                             <button class="btn btn-danger" data-dismiss="modal">Annuler</button>

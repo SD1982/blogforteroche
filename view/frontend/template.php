@@ -94,7 +94,7 @@
                 </div>
             </div>
         </div>
-<!-- //formulaire d'inscription de membre en vue d'un espace membre//
+<!-- fenetre modal de formulaire creation de compte -->
         <div class="container">
             <div class="modal fade" id="inscriptionForm">
                 <div class="modal-dialog">
@@ -124,7 +124,7 @@
                 </div>
             </div>
         </div>
- -->
+ 
  
 <!--contenu du site -->
         <?= $content ?>

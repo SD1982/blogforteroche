@@ -39,15 +39,23 @@ function adminPostUpdate($postId, $postTitle, $postContent)
     require('view/backend/listPostsView.php');
 }
 
-function adminDeletePost($postId)
+function adminDeletePost($postId, $password, $pseudo)
 {
     $postManager = new PostManager();
     $commentManager = new CommentManager();
-    $post = $postManager->deletePost($_GET['id']);
-    $comments = $commentManager->deleteComments($_GET['id']);
-    $postManager = new PostManager();
-    $posts = $postManager->getPosts();
-    require('view/backend/listPostsView.php');
+
+    $membermanager = new MembersManager();
+    $hashedPass['pass'] = $membermanager->checkAdminPassword($pseudo);
+    $isPasswordCorrect = password_verify($password, $hashedPass['pass']);
+    if ($isPasswordCorrect === false) {
+        throw new Exception('Mauvais pseudo ou password');
+    } else {
+        $post = $postManager->deletePost($_GET['id']);
+        $comments = $commentManager->deleteComments($_GET['id']);
+        $postManager = new PostManager();
+        $posts = $postManager->getPosts();
+        require('view/backend/listPostsView.php');
+    }
 }
 
 function adminAddComment($postId, $author, $comment)
@@ -57,7 +65,7 @@ function adminAddComment($postId, $author, $comment)
     if ($affectedLines === false) {
         die('Impossible d\'ajouter le commentaire !');
     } elseif ($_SESSION['pseudo'] = 'forteroche') {
-        header('Location: index.php?action=adminPost&id=' . $postId);
+        header('Location: index.php?action=adminPost&id=' . $postId . '#comments');
     }
 }
 
@@ -69,7 +77,7 @@ function adminDeleteComment($commentId, $postId)
     $commentManager = new CommentManager();
     $post = $postManager->getPost($_GET['id']);
     $comments = $commentManager->getComments($_GET['id']);
-    header('Location: index.php?action=adminPost&id=' . $postId);
+    header('Location: index.php?action=adminPost&id=' . $postId . '#comments');
 }
 
 
@@ -94,7 +102,7 @@ function adminValidateSignaledComment($commentId)
     $validateSignaledComment = $commentManager->signaledCommentValidation($_GET['id']);
     header('Location: index.php?action=moderateComments');
 }
-/* pour futur espace membre
+
 function createAccount($userPseudo, $hashedPass)
 {
     $membermanager = new MembersManager();
@@ -102,17 +110,16 @@ function createAccount($userPseudo, $hashedPass)
     header('Location: index.php');
 
 }
- */
-function checkAdminPassword()
+
+function checkAdminPassword($password, $pseudo)
 {
     $membermanager = new MembersManager();
-    $adminPassword = $membermanager->checkAdminPassword();
-    $isPasswordCorrect = password_verify($_POST['pass'], $adminPassword);
-    if (!$adminPassword) {
-        die('Mauvais pseudo ou mdp');
-    } else {
-        $_SESSION['pseudo'] = 'forteroche';
+    $hashedPass['pass'] = $membermanager->checkAdminPassword($pseudo);
+    $isPasswordCorrect = password_verify($password, $hashedPass['pass']);
+    if ($isPasswordCorrect === false) {
+        throw new Exception('Mauvais pseudo ou password');
+    } elseif ($isPasswordCorrect === true) {
+        $_SESSION['pseudo'] = $pseudo;
         header('Location: index.php?action=adminListPosts');
     }
-
 }

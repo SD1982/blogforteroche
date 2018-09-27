@@ -9,7 +9,7 @@
     <div id="listPostContainer">
     <?php
     while ($data = $posts->fetch()) {
-        ?>
+        ?> 
             <div>
                 <h3>
                     <a href="index.php?action=adminPost&amp;id=<?= $data['id'] ?>">

@@ -1,15 +1,17 @@
  /* media queries pour version mobile */
  @media screen and (max-width: 600px) {
-     .postImage {
-         display: none;
-     }
-
      .adminButton {
+         -ms-flex-wrap: wrap;
          flex-wrap: wrap;
      }
 
      .starter-template {
          display: none;
+     }
+
+     #lastPostContainer>div {
+         min-width: 310px;
+         max-width: 90%;
      }
  }
 
@@ -36,7 +38,7 @@
      text-align: center;
      color: wheat;
      height: 400px;
-     width: 100%;
+     max-width: 100%;
      position: relative;
 
  }
@@ -75,6 +77,8 @@
  }
 
  #lastPostContainer {
+     -webkit-box-pack: center;
+     -ms-flex-pack: center;
      justify-content: center;
      text-align: center;
      display: -webkit-box;
@@ -99,6 +103,11 @@
  #lastPostContainer>p {
      margin: 5px;
      padding: 5px;
+ }
+
+ a>img {
+     max-width: 90%;
+     height: auto;
  }
 
  .lastPost h3 {
@@ -127,6 +136,8 @@
  }
 
  #listPostContainer {
+     -webkit-box-pack: center;
+     -ms-flex-pack: center;
      justify-content: center;
      text-align: center;
      display: -webkit-box;
@@ -163,10 +174,7 @@
 
  /* affichage d'un article du site */
  .news {
-     -webkit-box-pack: center;
-     -ms-flex-pack: center;
-     justify-content: center;
-     text-align: center;
+     text-align: justify;
  }
 
  .newsContainer {
@@ -193,8 +201,11 @@
 
  .postImage {
      text-align: center;
-     height: 400px;
-     width: auto;
+ }
+
+ .postImage>img {
+     max-width: 90%;
+     height: 600px;
  }
 
  /* affichage des commentaires d'un article */

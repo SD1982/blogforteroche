@@ -14,7 +14,7 @@
                     <?= $signaled['comment_date_fr'] ?>
                 </p>
                 <p>
-                    <?= htmlspecialchars($signaled['comment_content']) ?>
+                    <?= htmlspecialchars($signaled['comment_content']) ?> 
                 </p>
             </div>
             <br/>

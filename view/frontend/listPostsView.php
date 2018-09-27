@@ -18,7 +18,7 @@
                     </a>  
                 </h3>
                     <a href="index.php?action=post&amp;id=<?= $data['id'] ?>">
-                    <img src=<?= $data['url_miniature'] ?> alt="">
+                    <img src=<?= $data['url_miniature'] ?> alt="<?= $data['title'] ?>">
                     </a>
                 <br/>
                 <p><?= strip_tags(substr($data['posts_content'], 0, 500)) ?> ...</p> 

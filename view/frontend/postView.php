@@ -12,7 +12,7 @@
         </div>
         <div class="postContent">
             <div class="postImage">
-                <img src=<?= $post['url_image'] ?> alt="">
+                <img src=<?= $post['url_image'] ?> alt="<?= $post['title'] ?>">
             </div>
             <br/>
             <div class="postText">
@@ -54,7 +54,7 @@
     </div>
 
 <!--contenu des commentaires de l'article -->    
-<div class="postComments">
+<div class="postComments" id="comments">
     <h2>Commentaires (<?= $totalComments ?>)</h2>
 <?php
 while ($comment = $comments->fetch()) {
