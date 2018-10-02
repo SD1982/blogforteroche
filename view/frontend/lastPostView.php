@@ -1,10 +1,10 @@
-<?php $title = 'billet simple pour l\'Alaska'; ?>
+<?php $title = 'Billet simple pour l\'Alaska'; ?>
 
 <?php ob_start(); ?>
 <!--listes des 3 derniers articles -->
 <div class="lastPost">
     <div class="lastPostTitle">
-        <h3>Dernier billet du blog :</h3>
+        <h3>Derniers billets du blog :</h3>
     </div>
     <div id="lastPostContainer">
 <?php

@@ -13,14 +13,17 @@ class PostManager extends Manager
         $req->execute(array($postTitle, $postContent, $postMiniature, $postImage));
     }
 
-    public function updatePost($postId, $postTitle, $postContent)
+
+    public function updatePost($postId, $postTitle, $postContent, $postMiniature, $postImage)
     {
         $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE posts SET title= :newTitle, posts_content= :newContent,  WHERE id= :thisPostId');
+        $req = $db->prepare('UPDATE posts SET title= :newTitle, posts_content= :newContent, url_miniature= :newMiniature, url_image= :newImage  WHERE id= :thisPostId');
         $req->execute(array(
+            'thisPostId' => $postId,
             'newTitle' => $postTitle,
             'newContent' => $postContent,
-            'thisPostId' => $postId
+            'newMiniature' => $postMiniature,
+            'newImage' => $postImage
         ));
     }
 

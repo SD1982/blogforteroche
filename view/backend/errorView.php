@@ -1,4 +1,4 @@
-<?php $title = 'billet simple pour l\'Alaska'; ?>
+<?php $title = 'Billet simple pour l\'Alaska'; ?>
 
 <?php ob_start(); ?>
 
@@ -8,9 +8,9 @@
 
     <?php
 
-echo $errorMessage;
+    echo $errorMessage;
 
-?>
+    ?>
 </div>
 
 <?php $content = ob_get_clean(); ?>

@@ -1,4 +1,4 @@
-<?php $title = 'billet simple pour l\'Alaska'; ?>
+<?php $title = 'Billet simple pour l\'Alaska'; ?>
 
 <?php ob_start(); ?>
 <!--contenu de l'article -->
@@ -82,7 +82,7 @@
                             <br />
                             <textarea class="form-control" id="content" name="content"><?= $post['posts_content'] ?></textarea>
                         </div>
-                        <!-- preparation de la modification d'image en meme temps que la modif d'article
+                        
                         <div>
                             <label for="title">Url de votre miniature</label><br />
                             <input type="text" class="form-control" name="miniature" value="<?= $post['url_miniature'] ?>">
@@ -93,7 +93,7 @@
                             <input type="text" class="form-control" name="image" value="<?= $post['url_image'] ?>">
                             <br/>
                         </div>
-                        -->
+                        
                         <div>
                             <input type="submit" class="btn btn-success" />
                             <button class="btn btn-danger" data-dismiss="modal">Annuler</button>

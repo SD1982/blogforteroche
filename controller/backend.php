@@ -30,20 +30,19 @@ function adminCreatePost()
     header('Location: index.php?action=adminListPosts');
 }
 
-function adminPostUpdate($postId, $postTitle, $postContent)
+function adminPostUpdate($postId, $postTitle, $postContent, $postMiniature, $postImage)
 {
     $postManager = new PostManager();
-    $post = $postManager->updatePost($_GET['id'], $_POST['title'], $_POST['content']);
+    $post = $postManager->updatePost($_GET['id'], $_POST['title'], $_POST['content'], $_POST['miniature'], $_POST['image']);
     $postManager = new PostManager();
     $posts = $postManager->getPosts();
     require('view/backend/listPostsView.php');
 }
 
-function adminDeletePost($postId, $password, $pseudo)
+function adminDeletePost($postId, $pseudo, $password)
 {
     $postManager = new PostManager();
     $commentManager = new CommentManager();
-
     $membermanager = new MembersManager();
     $hashedPass['pass'] = $membermanager->checkAdminPassword($pseudo);
     $isPasswordCorrect = password_verify($password, $hashedPass['pass']);

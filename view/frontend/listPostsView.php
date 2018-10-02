@@ -1,4 +1,4 @@
-<?php $title = 'billet simple pour l\'Alaska'; ?>
+<?php $title = 'Billet simple pour l\'Alaska'; ?>
 
 <?php ob_start(); ?>
 <!--listes des articles -->

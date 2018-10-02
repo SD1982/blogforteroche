@@ -73,7 +73,6 @@
      border-radius: 15px;
      color: wheat;
      margin: 5px 2px 5px 2px;
-     padding: 10px;
  }
 
  #lastPostContainer {
@@ -97,7 +96,7 @@
      margin: 5px 2px 5px 2px;
      padding: 10px;
      min-width: 310px;
-     max-width: 33%;
+     max-width: 49%;
  }
 
  #lastPostContainer>p {
@@ -156,7 +155,7 @@
      margin: 5px 2px 5px 2px;
      padding: 10px;
      min-width: 310px;
-     max-width: 33%;
+     max-width: 49%;
  }
 
  #listPostContainer>p {

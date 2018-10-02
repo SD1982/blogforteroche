@@ -74,7 +74,7 @@ try {
         } elseif ($_GET['action'] == 'adminAddComment') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 if (!empty($_POST['author']) && !empty($_POST['comment'])) {
-                    adminAddComment($_GET['id'], $_POST['author'], $_POST['comment']);
+                    adminAddComment($_GET['id'], htmlspecialchars($_POST['author']), htmlspecialchars($_POST['comment']));
                 } else {
                     throw new Exception('Tous les champs ne sont pas remplis !');
                 }
@@ -138,7 +138,7 @@ try {
             if ($_SESSION['pseudo'] == 'forteroche') {
                 if (isset($_POST['title']) && $_POST['content'] && $_POST['miniature'] && $_POST['image']) {
                     if (!empty($_POST['title']) && !empty($_POST['content']) && !empty($_POST['miniature']) && !empty($_POST['image'])) {
-                        adminCreatePost(htmlspecialchars($_POST['title']), htmlspecialchars($_POST['content']), htmlspecialchars($_POST['url_miniature']), htmlspecialchars($_POST['url_image']));
+                        adminCreatePost(htmlspecialchars($_POST['title']), htmlspecialchars($_POST['content']), htmlspecialchars($_POST['miniature']), htmlspecialchars($_POST['image']));
                     }
                 } else {
                     throw new Exception('Tous les champs ne sont pas remplis !');
@@ -150,8 +150,8 @@ try {
         } elseif ($_GET['action'] == 'postUpdate') {
             if (isset($_SESSION['pseudo']) && $_SESSION['pseudo'] == 'forteroche') {
                 if (isset($_GET['id']) && $_GET['id'] > 0) {
-                    if (!empty($_POST['title']) && !empty($_POST['content'])) {
-                        adminPostUpdate($_GET['id'], htmlspecialchars($_POST['title']), htmlspecialchars($_POST['content']));
+                    if (!empty($_POST['title']) && !empty($_POST['content']) && !empty($_POST['miniature']) && !empty($_POST['image'])) {
+                        adminPostUpdate($_GET['id'], htmlspecialchars($_POST['title']), htmlspecialchars($_POST['content']), htmlspecialchars($_POST['miniature']), htmlspecialchars($_POST['image']));
                     } else {
                         throw new Exception('Tous les champs ne sont pas remplis !');
                     }
